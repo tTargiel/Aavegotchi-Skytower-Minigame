@@ -6,34 +6,50 @@ var Skytower = Skytower || {};
 
 var w = window.innerWidth;
 var h = window.innerHeight;
+var scale = h / 968;
 
 class MainMenu extends Phaser.Scene {
 
-    constructor ()
-    {
+    constructor() {
         super({ key: 'MainMenu' });
     }
 
-    preload ()
-    {
+    async preload() {
         this.load.image('back', 'assets/images/buttons/back.png');
+        this.load.image('background', 'assets/images/background.png');
         this.load.image('customize', 'assets/images/buttons/customize.png');
         this.load.image('leaderboard', 'assets/images/buttons/leaderboard.png');
         this.load.image('logout', 'assets/images/buttons/logout.png');
         this.load.image('menu', 'assets/images/buttons/menu.png');
         this.load.image('start', 'assets/images/buttons/start.png');
         this.load.image('title', 'assets/images/buttons/title.png');
+
+        // Fetch player SVG
+        const numericTraits = [12, 12, 12, 12, 12, 12]; // UI to change the traits
+        const equippedWearables = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
+        const rawSVG = await Moralis.Cloud.run("getSVG", {
+            numericTraits: numericTraits,
+            equippedWearables: equippedWearables
+        });
+        let newSVG = rawSVG.substr(0, rawSVG.length - 6) + "<style>.gotchi-bg,.wearable-bg{display: none;}</style></svg>";
+        const svgBlob = new Blob([newSVG], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+        this.load.svg('player', url, { width: h, height: h });
+        this.load.on('filecomplete', function () {
+            var player = this.add.image(w * 0.3, h / 2, 'player');
+        }, this);
+        this.load.start();
     }
 
-    create ()
-    {
-        var title = this.add.image(w * 0.75, h * 0.21, 'title');
-        var menu = this.add.image(w * 0.75, h * 0.5, 'menu');
-        var start = this.add.image(w * 0.75, h * 0.33, 'start').setInteractive();
-        var customize = this.add.image(w * 0.75, h * 0.44, 'customize').setInteractive();
-        var leaderboard = this.add.image(w * 0.75, h * 0.535, 'leaderboard').setInteractive();
-        var logout = this.add.image(w * 0.75, h * 0.68, 'logout').setInteractive();
-        
+    create() {
+        var background = this.add.image(w / 2, h / 2, 'background');
+        var title = this.add.image(w * 0.75, h * 0.25, 'title').setScale(scale);
+        var menu = this.add.image(w * 0.75, h * 0.54, 'menu').setScale(scale);
+        var start = this.add.image(w * 0.75, h * 0.37, 'start').setInteractive().setScale(scale);
+        var customize = this.add.image(w * 0.75, h * 0.48, 'customize').setInteractive().setScale(scale);
+        var leaderboard = this.add.image(w * 0.75, h * 0.575, 'leaderboard').setInteractive().setScale(scale);
+        var logout = this.add.image(w * 0.75, h * 0.72, 'logout').setInteractive().setScale(scale);
+
         this.input.manager.enabled = true;
 
         start.on('pointerdown', function (ev) {
@@ -59,21 +75,40 @@ class MainMenu extends Phaser.Scene {
     }
 }
 
+class Game extends Phaser.Scene {
+
+    constructor() {
+        super({ key: 'Game' });
+    }
+
+    preload() {
+        // this.load.image('back', 'assets/images/buttons/back.png');  
+    }
+
+    create() {
+        var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
+        this.input.manager.enabled = true;
+
+        back.on('pointerdown', function (ev) {
+
+            this.scene.start('MainMenu');
+
+        }, this);
+    }
+}
+
 class Customize extends Phaser.Scene {
 
-    constructor ()
-    {
+    constructor() {
         super({ key: 'Customize' });
     }
 
-    preload ()
-    {
-        this.load.image('back', 'assets/images/buttons/back.png');  
+    preload() {
+        this.load.image('back', 'assets/images/buttons/back.png');
     }
 
-    create ()
-    {
-        var back = this.add.image(50, 50, 'back').setInteractive();
+    create() {
+        var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
@@ -86,44 +121,16 @@ class Customize extends Phaser.Scene {
 
 class Leaderboard extends Phaser.Scene {
 
-    constructor ()
-    {
+    constructor() {
         super({ key: 'Leaderboard' });
     }
 
-    preload ()
-    {
-        this.load.image('back', 'assets/images/buttons/back.png');  
+    preload() {
+        this.load.image('back', 'assets/images/buttons/back.png');
     }
 
-    create ()
-    {
-        var back = this.add.image(50, 50, 'back').setInteractive();
-        this.input.manager.enabled = true;
-
-        back.on('pointerdown', function (ev) {
-
-            this.scene.start('MainMenu');
-
-        }, this);
-    }
-}
-
-class Game extends Phaser.Scene {
-
-    constructor ()
-    {
-        super({ key: 'Game' });
-    }
-
-    preload ()
-    {
-        this.load.image('back', 'assets/images/buttons/back.png');  
-    }
-
-    create ()
-    {
-        var back = this.add.image(50, 50, 'back').setInteractive();
+    create() {
+        var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
@@ -147,7 +154,7 @@ var config = {
             debug: true
         }
     },
-    scene: [ MainMenu, Customize, Leaderboard, Game ]
+    scene: [MainMenu, Game, Customize, Leaderboard]
 };
 
 function launch() {
