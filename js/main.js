@@ -34,9 +34,10 @@ class MainMenu extends Phaser.Scene {
         let newSVG = rawSVG.substr(0, rawSVG.length - 6) + "<style>.gotchi-bg,.wearable-bg{display: none;}</style></svg>";
         const svgBlob = new Blob([newSVG], { type: "image/svg+xml;charset=utf-8" });
         const url = URL.createObjectURL(svgBlob);
-        this.load.svg('player', url, { width: h, height: h });
+        console.log(url)
+        this.load.svg('player', url, { width: w / 2, height: h });
         this.load.on('filecomplete', function () {
-            var player = this.add.image(w * 0.3, h / 2, 'player');
+            let player = this.add.image(w * 0.3, h / 2, 'player');
         }, this);
         this.load.start();
     }
@@ -49,6 +50,7 @@ class MainMenu extends Phaser.Scene {
         var customize = this.add.image(w * 0.75, h * 0.48, 'customize').setInteractive().setScale(scale);
         var leaderboard = this.add.image(w * 0.75, h * 0.575, 'leaderboard').setInteractive().setScale(scale);
         var logout = this.add.image(w * 0.75, h * 0.72, 'logout').setInteractive().setScale(scale);
+        let player = this.add.image(w * 0.3, h / 2, 'player');
 
         this.input.manager.enabled = true;
 
@@ -104,7 +106,7 @@ class Customize extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('back', 'assets/images/buttons/back.png');
+        // this.load.image('back', 'assets/images/buttons/back.png');
     }
 
     create() {
@@ -126,7 +128,7 @@ class Leaderboard extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('back', 'assets/images/buttons/back.png');
+        // this.load.image('back', 'assets/images/buttons/back.png');
     }
 
     create() {
