@@ -4,6 +4,9 @@ Moralis.serverURL = "https://ymcm6oxklb9t.bigmoralis.com:2053/server";
 
 var Skytower = Skytower || {};
 
+var w = window.innerWidth;
+var h = window.innerHeight;
+
 class MainMenu extends Phaser.Scene {
 
     constructor ()
@@ -13,18 +16,23 @@ class MainMenu extends Phaser.Scene {
 
     preload ()
     {
-        this.load.image('start', 'assets/images/buttons/start.png');
-        this.load.image('customization', 'assets/images/buttons/customization.png');
+        this.load.image('back', 'assets/images/buttons/back.png');
+        this.load.image('customize', 'assets/images/buttons/customize.png');
         this.load.image('leaderboard', 'assets/images/buttons/leaderboard.png');
         this.load.image('logout', 'assets/images/buttons/logout.png');
+        this.load.image('menu', 'assets/images/buttons/menu.png');
+        this.load.image('start', 'assets/images/buttons/start.png');
+        this.load.image('title', 'assets/images/buttons/title.png');
     }
 
     create ()
     {
-        var start = this.add.image(400, 300, 'start').setInteractive();
-        var customization = this.add.image(400, 400, 'customization').setInteractive();
-        var leaderboard = this.add.image(400, 500, 'leaderboard').setInteractive();
-        var logout = this.add.image(400, 600, 'logout').setInteractive();
+        var title = this.add.image(w * 0.75, h * 0.21, 'title');
+        var menu = this.add.image(w * 0.75, h * 0.5, 'menu');
+        var start = this.add.image(w * 0.75, h * 0.33, 'start').setInteractive();
+        var customize = this.add.image(w * 0.75, h * 0.44, 'customize').setInteractive();
+        var leaderboard = this.add.image(w * 0.75, h * 0.535, 'leaderboard').setInteractive();
+        var logout = this.add.image(w * 0.75, h * 0.68, 'logout').setInteractive();
         
         this.input.manager.enabled = true;
 
@@ -33,9 +41,9 @@ class MainMenu extends Phaser.Scene {
             this.scene.start('Game');
 
         }, this);
-        customization.on('pointerdown', function (ev) {
+        customize.on('pointerdown', function (ev) {
 
-            this.scene.start('Customization');
+            this.scene.start('Customize');
 
         }, this);
         leaderboard.on('pointerdown', function (ev) {
@@ -51,11 +59,11 @@ class MainMenu extends Phaser.Scene {
     }
 }
 
-class Customization extends Phaser.Scene {
+class Customize extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'Customization' });
+        super({ key: 'Customize' });
     }
 
     preload ()
@@ -139,7 +147,7 @@ var config = {
             debug: true
         }
     },
-    scene: [ MainMenu, Customization, Leaderboard, Game ]
+    scene: [ MainMenu, Customize, Leaderboard, Game ]
 };
 
 function launch() {
