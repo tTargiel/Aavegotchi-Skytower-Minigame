@@ -45,7 +45,6 @@ class MainMenu extends Phaser.Scene {
         }, this);
         logout.on('pointerdown', function (ev) {
 
-            //this.scene.start('Logout');
             logOut();
 
         }, this);
@@ -66,7 +65,7 @@ class Customization extends Phaser.Scene {
 
     create ()
     {
-        var back = this.add.image(100, 100, 'back').setInteractive();
+        var back = this.add.image(50, 50, 'back').setInteractive();
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
@@ -91,7 +90,7 @@ class Leaderboard extends Phaser.Scene {
 
     create ()
     {
-        var back = this.add.image(100, 100, 'back').setInteractive();
+        var back = this.add.image(50, 50, 'back').setInteractive();
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
@@ -116,7 +115,7 @@ class Game extends Phaser.Scene {
 
     create ()
     {
-        var back = this.add.image(100, 100, 'back').setInteractive();
+        var back = this.add.image(50, 50, 'back').setInteractive();
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
@@ -124,23 +123,6 @@ class Game extends Phaser.Scene {
             this.scene.start('MainMenu');
 
         }, this);
-    }
-}
-class Logout extends Phaser.Scene {
-
-    constructor ()
-    {
-        super({ key: 'Logout' });
-    }
-
-    preload ()
-    {
-        
-    }
-
-    create ()
-    {
-        logOut();
     }
 }
 
