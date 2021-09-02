@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'KenVector Future';
+    src: url('../assets/fonts/KenVector-Future.woff2') format('woff2'),
+        url('../assets/fonts/KenVector-Future.woff') format('woff'),
+        url('../assets/fonts/KenVector-Future.ttf') format('truetype'),
+        url('../assets/fonts/KenVector-Future.svg#KenVector-Future') format('svg');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'KenVector Future Thin';
+    src: url('../assets/fonts/KenVector-Future-Thin.woff2') format('woff2'),
+        url('../assets/fonts/KenVector-Future-Thin.woff') format('woff'),
+        url('../assets/fonts/KenVector-Future-Thin.ttf') format('truetype'),
+        url('../assets/fonts/KenVector-Future-Thin.svg#KenVector-Future-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
 body {
     margin: 0px;
     padding: 0px;
@@ -5,16 +25,17 @@ body {
 button {
     background-color: #4ea3f9;
     background-image: linear-gradient(to bottom right, #8df2fe, #4ea3f9);
-    border-radius: 16px;
-    border: none;
-    box-shadow: 0 10px #999;
-    color: #560bad;
+    border-radius: 8px;
+    border: 2px solid #1989b8;
+    box-shadow: 0 10px #166d92;
+    color: #fff;
     cursor: pointer;
     display: inline-block;
+    font-family: 'KenVector Future';
     font-size: 24px;
     font-weight: bold;
     outline: none;
-    padding: 128px 48px;
+    padding: 16px 64px;
     text-align: center;
     text-decoration: none;
 }
@@ -23,13 +44,22 @@ button:hover {
     background-image: linear-gradient(to bottom right, #5bc0be, #4ea3f9);
 }
 button:active {
-    box-shadow: 0 6px #666;
+    box-shadow: 0 6px #166d92;
     transform: translateY(4px);
 }
+/* h4 {
+    font-size: 24px;
+    background: linear-gradient(45deg, #ccc, #fff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+} */
 #contents {
     left: 50%;
-    margin-left: -219px;
-    margin-top: -71px;
+    margin-left: -308px;
+    margin-top: 120px;
     position: absolute;
     top: 50%;
 }
@@ -47,7 +77,7 @@ button:active {
 #logo {
     bottom: 0px;
     left: 50%;
-    margin-bottom: 75%;
+    margin-bottom: 33%;
     margin-left: -75%;
     position: absolute;
 }
