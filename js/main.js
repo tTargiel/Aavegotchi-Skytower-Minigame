@@ -13,18 +13,39 @@ class MainMenu extends Phaser.Scene {
 
     preload ()
     {
-        this.load.image('preloaderBar', 'assets/images/old/preloader-bar.png');
+        this.load.image('start', 'assets/images/buttons/start.png');
+        this.load.image('customization', 'assets/images/buttons/customization.png');
+        this.load.image('leaderboard', 'assets/images/buttons/leaderboard.png');
+        this.load.image('logout', 'assets/images/buttons/logout.png');
     }
 
     create ()
     {
-        //this.face = this.add.image(400, 300, 'preloaderBar');
-        var preloaderBar = this.add.image(400, 300, 'preloaderBar').setInteractive();
+        var start = this.add.image(400, 300, 'start').setInteractive();
+        var customization = this.add.image(400, 400, 'customization').setInteractive();
+        var leaderboard = this.add.image(400, 500, 'leaderboard').setInteractive();
+        var logout = this.add.image(400, 600, 'logout').setInteractive();
+        
         this.input.manager.enabled = true;
 
-        preloaderBar.on('pointerdown', function (ev) {
+        start.on('pointerdown', function (ev) {
+
+            this.scene.start('Game');
+
+        }, this);
+        customization.on('pointerdown', function (ev) {
 
             this.scene.start('Customization');
+
+        }, this);
+        leaderboard.on('pointerdown', function (ev) {
+
+            this.scene.start('Leaderboard');
+
+        }, this);
+        logout.on('pointerdown', function (ev) {
+
+            this.scene.start('Logout');
 
         }, this);
     }
@@ -39,21 +60,21 @@ class Customization extends Phaser.Scene {
 
     preload ()
     {
-        this.load.image('enemy', 'assets/images/old/enemy.png');
+        //this.load.image('enemy', 'assets/images/old/enemy.png');
     }
 
     create ()
     {
         //this.face = this.add.image(400, 300, 'enemy');
-        var enemy = this.add.image(400, 300, 'enemy').setInteractive();
+        // var enemy = this.add.image(400, 300, 'enemy').setInteractive();
 
-        this.input.manager.enabled = true;
+        // this.input.manager.enabled = true;
 
-        enemy.on('pointerdown', function () {
+        // enemy.on('pointerdown', function () {
 
-            this.scene.start('Leaderboard');
+        //     this.scene.start('Leaderboard');
 
-        }, this);
+        // }, this);
     }
 }
 
@@ -66,21 +87,21 @@ class Leaderboard extends Phaser.Scene {
 
     preload ()
     {
-        this.load.image('player', 'assets/images/old/player.png');
+       // this.load.image('player', 'assets/images/old/player.png');
     }
 
     create ()
     {
         //this.face = this.add.image(400, 300, 'player');
-        var player = this.add.image(400, 300, 'player').setInteractive();
+        // var player = this.add.image(400, 300, 'player').setInteractive();
 
-        this.input.manager.enabled = true;
+        // this.input.manager.enabled = true;
 
-        player.on('pointerdown', function () {
+        // player.on('pointerdown', function () {
 
-            this.scene.start('Game');
+        //     this.scene.start('Game');
 
-        }, this);
+        // }, this);
     }
 }
 
@@ -93,21 +114,47 @@ class Game extends Phaser.Scene {
 
     preload ()
     {
-        this.load.image('rock', 'assets/images/old/rock.png');
+        //this.load.image('rock', 'assets/images/old/rock.png');
     }
 
     create ()
     {
         //this.face = this.add.image(400, 300, 'rock');
-        var rock = this.add.image(400, 300, 'rock').setInteractive();
+        // var rock = this.add.image(400, 300, 'rock').setInteractive();
 
-        this.input.manager.enabled = true;
+        // this.input.manager.enabled = true;
 
-        rock.on('pointerdown', function () {
+        // rock.on('pointerdown', function () {
 
-            this.scene.start('MainMenu');
+        //     this.scene.start('MainMenu');
 
-        }, this);
+        // }, this);
+    }
+}
+class Logout extends Phaser.Scene {
+
+    constructor ()
+    {
+        super({ key: 'Logout' });
+    }
+
+    preload ()
+    {
+        //this.load.image('rock', 'assets/images/old/rock.png');
+    }
+
+    create ()
+    {
+        //this.face = this.add.image(400, 300, 'rock');
+        // var rock = this.add.image(400, 300, 'rock').setInteractive();
+
+        // this.input.manager.enabled = true;
+
+        // rock.on('pointerdown', function () {
+
+        //     this.scene.start('MainMenu');
+
+        // }, this);
     }
 }
 
