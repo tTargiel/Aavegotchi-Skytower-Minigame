@@ -45,7 +45,8 @@ class MainMenu extends Phaser.Scene {
         }, this);
         logout.on('pointerdown', function (ev) {
 
-            this.scene.start('Logout');
+            //this.scene.start('Logout');
+            logOut();
 
         }, this);
     }
@@ -60,21 +61,19 @@ class Customization extends Phaser.Scene {
 
     preload ()
     {
-        //this.load.image('enemy', 'assets/images/old/enemy.png');
+        this.load.image('back', 'assets/images/buttons/back.png');  
     }
 
     create ()
     {
-        //this.face = this.add.image(400, 300, 'enemy');
-        // var enemy = this.add.image(400, 300, 'enemy').setInteractive();
+        var back = this.add.image(100, 100, 'back').setInteractive();
+        this.input.manager.enabled = true;
 
-        // this.input.manager.enabled = true;
+        back.on('pointerdown', function (ev) {
 
-        // enemy.on('pointerdown', function () {
+            this.scene.start('MainMenu');
 
-        //     this.scene.start('Leaderboard');
-
-        // }, this);
+        }, this);
     }
 }
 
@@ -87,21 +86,19 @@ class Leaderboard extends Phaser.Scene {
 
     preload ()
     {
-       // this.load.image('player', 'assets/images/old/player.png');
+        this.load.image('back', 'assets/images/buttons/back.png');  
     }
 
     create ()
     {
-        //this.face = this.add.image(400, 300, 'player');
-        // var player = this.add.image(400, 300, 'player').setInteractive();
+        var back = this.add.image(100, 100, 'back').setInteractive();
+        this.input.manager.enabled = true;
 
-        // this.input.manager.enabled = true;
+        back.on('pointerdown', function (ev) {
 
-        // player.on('pointerdown', function () {
+            this.scene.start('MainMenu');
 
-        //     this.scene.start('Game');
-
-        // }, this);
+        }, this);
     }
 }
 
@@ -114,21 +111,19 @@ class Game extends Phaser.Scene {
 
     preload ()
     {
-        //this.load.image('rock', 'assets/images/old/rock.png');
+        this.load.image('back', 'assets/images/buttons/back.png');  
     }
 
     create ()
     {
-        //this.face = this.add.image(400, 300, 'rock');
-        // var rock = this.add.image(400, 300, 'rock').setInteractive();
+        var back = this.add.image(100, 100, 'back').setInteractive();
+        this.input.manager.enabled = true;
 
-        // this.input.manager.enabled = true;
+        back.on('pointerdown', function (ev) {
 
-        // rock.on('pointerdown', function () {
+            this.scene.start('MainMenu');
 
-        //     this.scene.start('MainMenu');
-
-        // }, this);
+        }, this);
     }
 }
 class Logout extends Phaser.Scene {
@@ -140,21 +135,12 @@ class Logout extends Phaser.Scene {
 
     preload ()
     {
-        //this.load.image('rock', 'assets/images/old/rock.png');
+        
     }
 
     create ()
     {
-        //this.face = this.add.image(400, 300, 'rock');
-        // var rock = this.add.image(400, 300, 'rock').setInteractive();
-
-        // this.input.manager.enabled = true;
-
-        // rock.on('pointerdown', function () {
-
-        //     this.scene.start('MainMenu');
-
-        // }, this);
+        logOut();
     }
 }
 
