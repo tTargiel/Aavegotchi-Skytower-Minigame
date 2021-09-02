@@ -15,6 +15,8 @@ class MainMenu extends Phaser.Scene {
     }
 
     async preload() {
+        this.load.audio('click1', 'assets/audio/click1.ogg');
+
         this.load.image('back', 'assets/images/buttons/back.png');
         this.load.image('background', 'assets/images/background.png');
         this.load.image('customize', 'assets/images/buttons/customize.png');
@@ -43,6 +45,8 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        var click1 = this.sound.add('click1');
+
         var background = this.add.image(w / 2, h / 2, 'background');
         var title = this.add.image(w * 0.75, h * 0.25, 'title').setScale(scale);
         var menu = this.add.image(w * 0.75, h * 0.54, 'menu').setScale(scale);
@@ -55,22 +59,22 @@ class MainMenu extends Phaser.Scene {
         this.input.manager.enabled = true;
 
         start.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('Game');
 
         }, this);
         customize.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('Customize');
 
         }, this);
         leaderboard.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('Leaderboard');
 
         }, this);
         logout.on('pointerdown', function (ev) {
-
+            // click1.play();
             logOut();
 
         }, this);
@@ -88,11 +92,13 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        var click1 = this.sound.add('click1');
+
         var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('MainMenu');
 
         }, this);
@@ -110,11 +116,13 @@ class Customize extends Phaser.Scene {
     }
 
     create() {
+        var click1 = this.sound.add('click1');
+
         var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('MainMenu');
 
         }, this);
@@ -132,11 +140,13 @@ class Leaderboard extends Phaser.Scene {
     }
 
     create() {
+        var click1 = this.sound.add('click1');
+
         var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
-
+            click1.play();
             this.scene.start('MainMenu');
 
         }, this);
