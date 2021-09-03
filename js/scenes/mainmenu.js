@@ -4,18 +4,7 @@ class MainMenu extends Phaser.Scene {
         super({ key: 'MainMenu' });
     }
 
-    async preload() {
-        this.load.audio('click1', 'assets/audio/click1.ogg');
-
-        this.load.image('back', 'assets/images/buttons/back.png');
-        this.load.image('background', 'assets/images/background.png');
-        this.load.image('customize', 'assets/images/buttons/customize.png');
-        this.load.image('leaderboard', 'assets/images/buttons/leaderboard.png');
-        this.load.image('logout', 'assets/images/buttons/logout.png');
-        this.load.image('menu', 'assets/images/buttons/menu.png');
-        this.load.image('start', 'assets/images/buttons/start.png');
-        this.load.image('title', 'assets/images/buttons/title.png');
-
+    async fetchSVG() {
         // Fetch player SVG
         const numericTraits = [12, 12, 12, 12, 12, 12]; // UI to change the traits
         const equippedWearables = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
@@ -32,6 +21,22 @@ class MainMenu extends Phaser.Scene {
             let player = this.add.image(w * 0.3, h / 2, 'player');
         }, this);
         this.load.start();
+    }
+
+    preload() {
+        this.load.audio('click1', 'assets/audio/click1.ogg');
+        this.load.audio('click2', 'assets/audio/click2.ogg');
+
+        this.load.image('back', 'assets/images/buttons/back.png');
+        this.load.image('background', 'assets/images/background.png');
+        this.load.image('customize', 'assets/images/buttons/customize.png');
+        this.load.image('leaderboard', 'assets/images/buttons/leaderboard.png');
+        this.load.image('logout', 'assets/images/buttons/logout.png');
+        this.load.image('menu', 'assets/images/buttons/menu.png');
+        this.load.image('start', 'assets/images/buttons/start.png');
+        this.load.image('title', 'assets/images/buttons/title.png');
+
+        this.fetchSVG();
     }
 
     create() {

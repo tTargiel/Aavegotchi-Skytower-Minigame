@@ -34,7 +34,7 @@ function launch() {
         document.getElementById("gradient").style.display = "none";
         document.getElementById("contents").style.display = "none";
 
-        Skytower.game = new Phaser.Game(config);
+        game = new Phaser.Game(config);
     }
 }
 launch();

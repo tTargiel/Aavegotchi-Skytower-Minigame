@@ -9,13 +9,13 @@ class Game extends Phaser.Scene {
     }
 
     create() {
-        var click1 = this.sound.add('click1');
+        var click2 = this.sound.add('click2');
 
         var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
-            click1.play();
+            click2.play();
             this.scene.start('MainMenu');
 
         }, this);
