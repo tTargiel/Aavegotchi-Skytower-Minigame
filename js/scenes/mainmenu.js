@@ -4,10 +4,8 @@ class MainMenu extends Phaser.Scene {
         super({ key: 'MainMenu' });
     }
 
-    async fetchSVG() {
+    async fetchSVG(numericTraits, equippedWearables) {
         // Fetch player SVG
-        const numericTraits = [12, 12, 12, 12, 12, 12]; // UI to change the traits
-        const equippedWearables = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
         const rawSVG = await Moralis.Cloud.run("getSVG", {
             numericTraits: numericTraits,
             equippedWearables: equippedWearables
@@ -36,7 +34,7 @@ class MainMenu extends Phaser.Scene {
         this.load.image('start', 'assets/images/buttons/start.png');
         this.load.image('title', 'assets/images/buttons/title.png');
 
-        this.fetchSVG();
+        this.fetchSVG([99, 99, 99, 99, 99, 99], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     }
 
     create() {

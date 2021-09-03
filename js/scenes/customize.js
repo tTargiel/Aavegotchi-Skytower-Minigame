@@ -16,15 +16,16 @@ class Customize extends Phaser.Scene {
         var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
         var menu = this.add.image(w * 0.75, h * 0.5, 'menu').setScale(scale, 1.2 * scale);
 
-        
+        const numericTraits = [12, 12, 12, 12, 12, 12]; // UI to change the traits
+        const equippedWearables = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         let player = this.add.image(w * 0.3, h / 2, 'player');
         this.input.manager.enabled = true;
 
         back.on('pointerdown', function (ev) {
             click2.play();
-            // this.scene.start('MainMenu');
-            sceneMainMenu.fetchSVG();
+            this.scene.start('MainMenu');
+            // sceneMainMenu.fetchSVG();
 
         }, this);
     }

@@ -21,7 +21,10 @@ var config = {
             debug: true
         }
     },
-    scene: [MainMenu, Game, Customize, Leaderboard]
+    scene: [MainMenu, Game, Customize, Leaderboard],
+    audio: {
+        disableWebAudio: true
+    }
 };
 
 function launch() {
