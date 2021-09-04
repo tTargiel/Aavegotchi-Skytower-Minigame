@@ -7,6 +7,12 @@ var Skytower = Skytower || {};
 var w = window.innerWidth;
 var h = window.innerHeight;
 var scale = h / 968;
+var platformsXcoordinates = [];
+var platformsYcoordinates = [];
+var platforms, platform;
+var minIndex = 0;
+var amountOfPlatforms = 5;
+var i;
 
 var config = {
     type: Phaser.AUTO,
