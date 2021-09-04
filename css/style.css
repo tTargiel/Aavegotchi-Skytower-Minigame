@@ -19,7 +19,9 @@
     font-display: swap;
 }
 body {
+    height: 100%;
     margin: 0px;
+    overflow: hidden;
     padding: 0px;
 }
 button {

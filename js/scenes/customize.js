@@ -19,10 +19,10 @@ class Customize extends Phaser.Scene {
         //     // the variable is defined
         //     player.destroy();
         // }
-        // if (this.textures.exists('player')) {
-        //     this.textures.removeKey('player');
-        //     this.textures.remove('player');
-        // }
+        if (this.textures.exists('player')) {
+            this.textures.removeKey('player');
+            this.textures.remove('player');
+        }
         // if (this.textures.exists('more')) {
         //     this.textures.removeKey('more');
         //     this.textures.remove('more');
@@ -53,7 +53,7 @@ class Customize extends Phaser.Scene {
         console.log(this.customizescreen);
         this.load.svg('player', url, { width: w / 2, height: h });
         this.load.on('filecomplete', function () {
-            let player = this.add.image(w * 0.3, h / 2, 'player');
+            let player = this.customizescreen.create(w * 0.3, h / 2, 'player');
         }, this);
         this.load.start();
     }
@@ -72,22 +72,22 @@ class Customize extends Phaser.Scene {
 
         var click2 = this.sound.add('click2');
 
-        var background = this.add.image(w / 2, h / 2, 'background');
-        var back = this.add.image(50, 50, 'back').setInteractive().setScale(0.7 * scale);
-        var customizeheader = this.add.image(w * 0.75, h * 0.20, 'customizeheader').setScale(scale);
-        var menu = this.add.image(w * 0.75, h * 0.54, 'menu').setScale(scale, 1.2 * scale);
-        var less1 = this.add.image(w * 0.65, h * 0.29, 'less').setInteractive().setScale(0.6 * scale);
-        var more1 = this.add.image(w * 0.85, h * 0.29, 'more').setInteractive().setScale(0.6 * scale);
-        var less2 = this.add.image(w * 0.65, h * 0.39, 'less').setInteractive().setScale(0.6 * scale);
-        var more2 = this.add.image(w * 0.85, h * 0.39, 'more').setInteractive().setScale(0.6 * scale);
-        var less3 = this.add.image(w * 0.65, h * 0.49, 'less').setInteractive().setScale(0.6 * scale);
-        var more3 = this.add.image(w * 0.85, h * 0.49, 'more').setInteractive().setScale(0.6 * scale);
-        var less4 = this.add.image(w * 0.65, h * 0.59, 'less').setInteractive().setScale(0.6 * scale);
-        var more4 = this.add.image(w * 0.85, h * 0.59, 'more').setInteractive().setScale(0.6 * scale);
-        var less5 = this.add.image(w * 0.65, h * 0.69, 'less').setInteractive().setScale(0.6 * scale);
-        var more5 = this.add.image(w * 0.85, h * 0.69, 'more').setInteractive().setScale(0.6 * scale);
-        var less6 = this.add.image(w * 0.65, h * 0.79, 'less').setInteractive().setScale(0.6 * scale);
-        var more6 = this.add.image(w * 0.85, h * 0.79, 'more').setInteractive().setScale(0.6 * scale);
+        var background = this.customizescreen.create(w / 2, h / 2, 'background');
+        var back = this.customizescreen.create(50, 50, 'back').setInteractive().setScale(0.7 * scale);
+        var customizeheader = this.customizescreen.create(w * 0.75, h * 0.20, 'customizeheader').setScale(scale);
+        var menu = this.customizescreen.create(w * 0.75, h * 0.54, 'menu').setScale(scale, 1.2 * scale);
+        var less1 = this.customizescreen.create(w * 0.65, h * 0.29, 'less').setInteractive().setScale(0.6 * scale);
+        var more1 = this.customizescreen.create(w * 0.85, h * 0.29, 'more').setInteractive().setScale(0.6 * scale);
+        var less2 = this.customizescreen.create(w * 0.65, h * 0.39, 'less').setInteractive().setScale(0.6 * scale);
+        var more2 = this.customizescreen.create(w * 0.85, h * 0.39, 'more').setInteractive().setScale(0.6 * scale);
+        var less3 = this.customizescreen.create(w * 0.65, h * 0.49, 'less').setInteractive().setScale(0.6 * scale);
+        var more3 = this.customizescreen.create(w * 0.85, h * 0.49, 'more').setInteractive().setScale(0.6 * scale);
+        var less4 = this.customizescreen.create(w * 0.65, h * 0.59, 'less').setInteractive().setScale(0.6 * scale);
+        var more4 = this.customizescreen.create(w * 0.85, h * 0.59, 'more').setInteractive().setScale(0.6 * scale);
+        var less5 = this.customizescreen.create(w * 0.65, h * 0.69, 'less').setInteractive().setScale(0.6 * scale);
+        var more5 = this.customizescreen.create(w * 0.85, h * 0.69, 'more').setInteractive().setScale(0.6 * scale);
+        var less6 = this.customizescreen.create(w * 0.65, h * 0.79, 'less').setInteractive().setScale(0.6 * scale);
+        var more6 = this.customizescreen.create(w * 0.85, h * 0.79, 'more').setInteractive().setScale(0.6 * scale);
 
         var text1 = this.add.text(w * 0.725, h * 0.275, "Slot 1", { fontFamily: "KenVector Future", fontSize: 26, color: "#000" });
         var text2 = this.add.text(w * 0.722, h * 0.375, "Slot 2", { fontFamily: "KenVector Future", fontSize: 26, color: "#000" });
@@ -97,32 +97,32 @@ class Customize extends Phaser.Scene {
         var text6 = this.add.text(w * 0.722, h * 0.775, "Slot 6", { fontFamily: "KenVector Future", fontSize: 26, color: "#000" });
 
         // var player = sceneMainMenu.player;
-        let player = this.add.image(w * 0.3, h / 2, 'player')
+        let player = this.customizescreen.create(w * 0.3, h / 2, 'player')
 
-        this.customizescreen.add(click2);
-        this.customizescreen.add(background);
-        this.customizescreen.add(back);
-        this.customizescreen.add(customizeheader);
-        this.customizescreen.add(menu);
-        this.customizescreen.add(less1);
-        this.customizescreen.add(more1);
-        this.customizescreen.add(less2);
-        this.customizescreen.add(more2);
-        this.customizescreen.add(less3);
-        this.customizescreen.add(more3);
-        this.customizescreen.add(less4);
-        this.customizescreen.add(more4);
-        this.customizescreen.add(less5);
-        this.customizescreen.add(more5);
-        this.customizescreen.add(less6);
-        this.customizescreen.add(more6);
-        this.customizescreen.add(text1);
-        this.customizescreen.add(text2);
-        this.customizescreen.add(text3);
-        this.customizescreen.add(text4);
-        this.customizescreen.add(text5);
-        this.customizescreen.add(text6);
-        this.customizescreen.add(player);
+        // this.customizescreen.add(click2);
+        // this.customizescreen.add(background);
+        // this.customizescreen.add(back);
+        // this.customizescreen.add(customizeheader);
+        // this.customizescreen.add(menu);
+        // this.customizescreen.add(less1);
+        // this.customizescreen.add(more1);
+        // this.customizescreen.add(less2);
+        // this.customizescreen.add(more2);
+        // this.customizescreen.add(less3);
+        // this.customizescreen.add(more3);
+        // this.customizescreen.add(less4);
+        // this.customizescreen.add(more4);
+        // this.customizescreen.add(less5);
+        // this.customizescreen.add(more5);
+        // this.customizescreen.add(less6);
+        // this.customizescreen.add(more6);
+        // this.customizescreen.add(text1);
+        // this.customizescreen.add(text2);
+        // this.customizescreen.add(text3);
+        // this.customizescreen.add(text4);
+        // this.customizescreen.add(text5);
+        // this.customizescreen.add(text6);
+        // this.customizescreen.add(player);
 
         this.input.manager.enabled = true;
 
@@ -175,9 +175,9 @@ class Customize extends Phaser.Scene {
         }, this);
         less6.on('pointerdown', function (ev) {
             click2.play();
-            equippedWearables[5] -= 3;
-            if (equippedWearables[5] < 0) {
-                equippedWearables[5] = 100;
+            equippedWearables[3] -= 3;
+            if (equippedWearables[3] < 0) {
+                equippedWearables[3] = 100;
             }
             this.fetchSVG(numericTraits, equippedWearables);
         }, this);
@@ -224,9 +224,9 @@ class Customize extends Phaser.Scene {
         }, this);
         more6.on('pointerdown', function (ev) {
             click2.play();
-            equippedWearables[5] += 3;
-            if (equippedWearables[5] > 100) {
-                equippedWearables[5] = 0;
+            equippedWearables[3] += 3;
+            if (equippedWearables[3] > 100) {
+                equippedWearables[3] = 0;
             }
             this.fetchSVG(numericTraits, equippedWearables);
         }, this);
