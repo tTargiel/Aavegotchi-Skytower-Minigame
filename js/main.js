@@ -14,6 +14,9 @@ var minIndex = 0;
 var amountOfPlatforms = 5;
 var i;
 
+let numericTraits = [0, 0, 0, 0, 0, 0]; // UI to change the traits
+let equippedWearables = [1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 var config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
@@ -43,7 +46,7 @@ function launch() {
         document.getElementById("gradient").style.display = "none";
         document.getElementById("contents").style.display = "none";
 
-        game = new Phaser.Game(config);
+        var game = new Phaser.Game(config);
     }
 }
 launch();

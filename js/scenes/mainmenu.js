@@ -6,14 +6,22 @@ class MainMenu extends Phaser.Scene {
 
     async fetchSVG(numericTraits, equippedWearables) {
         // Fetch player SVG
-        const rawSVG = await Moralis.Cloud.run("getSVG", {
+        let rawSVG = await Moralis.Cloud.run("getSVG", {
             numericTraits: numericTraits,
             equippedWearables: equippedWearables
         });
         let newSVG = rawSVG.substr(0, rawSVG.length - 6) + "<style>.gotchi-bg,.wearable-bg{display: none;}</style></svg>";
-        const svgBlob = new Blob([newSVG], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(svgBlob);
-        console.log(url)
+        let svgBlob = new Blob([newSVG], { type: "image/svg+xml;charset=utf-8" });
+        let url = URL.createObjectURL(svgBlob);
+        // console.log(url)
+        if (typeof player !== 'undefined') {
+            // the variable is defined
+            player.destroy();
+        }
+        if (this.textures.exists('player')) {
+            this.textures.removeKey('player');
+            this.textures.remove('player');
+        }
         this.load.svg('player', url, { width: w / 2, height: h });
         this.load.on('filecomplete', function () {
             let player = this.add.image(w * 0.3, h / 2, 'player');
@@ -34,7 +42,7 @@ class MainMenu extends Phaser.Scene {
         this.load.image('start', 'assets/images/buttons/start.png');
         this.load.image('title', 'assets/images/buttons/title.png');
 
-        this.fetchSVG([99, 99, 99, 99, 99, 99], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        this.fetchSVG(numericTraits, equippedWearables);
     }
 
     create() {
@@ -47,6 +55,7 @@ class MainMenu extends Phaser.Scene {
         var customize = this.add.image(w * 0.75, h * 0.48, 'customize').setInteractive().setScale(scale);
         var leaderboard = this.add.image(w * 0.75, h * 0.575, 'leaderboard').setInteractive().setScale(scale);
         var logout = this.add.image(w * 0.75, h * 0.72, 'logout').setInteractive().setScale(scale);
+
         let player = this.add.image(w * 0.3, h / 2, 'player');
 
         this.input.manager.enabled = true;
