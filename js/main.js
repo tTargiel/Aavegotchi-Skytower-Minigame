@@ -8,20 +8,20 @@ var game;
 var w = window.innerWidth;
 var h = window.innerHeight;
 var scale = h / 968;
-var tilesize = 48 * scale;
+var tilesize = 48;
 
 var platformsXcoordinates = [];
 var platformsYcoordinates = [];
 var platforms;
-var platform = 0;
-var amountOfPlatforms = Math.floor((h - (40 * scale)) / (tilesize * 3));
+var platform;
+var amountOfPlatforms = Math.floor(h / (tilesize * 3));
 var tilescale = tilesize / (48 * scale);
 
-var vel, tilemin, tilemax;
+var vel, tilemin, tilemax, temp, center, blockwidth, xd;
 
 var cont = 'container';
 var coll = 'collider';
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 40; i++) {
     eval("var "+cont+i);
     eval("var "+coll+i);
 }
@@ -32,7 +32,7 @@ for (let j = 0; j < 10; j++) {
 
 // var container0, container1, container2, container3, container4, container5, container6, container7, container8, container9;
 // var collider0, collider1, collider2, collider3, collider4, collider5, collider6, collider7, collider8, collider9;
-var cursors, player, ground, collider;
+var cursors, player, ground, walls, collider;
 
 let left = Math.floor(w * 0.2);
 let right = Math.floor(w * 0.8) - 192;
@@ -51,7 +51,7 @@ var config = {
             // gravity: {
             //     y: 500
             // },
-            debug: true
+            // debug: true
         }
     },
     scene: [MainMenu, Game, Customize, Leaderboard],

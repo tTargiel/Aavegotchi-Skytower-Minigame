@@ -224,7 +224,7 @@ class Customize extends Phaser.Scene {
         }, this);
         more6.on('pointerdown', function (ev) {
             click2.play();
-            equippedWearables[3] += 3;
+            equippedWearables[3] += 18;
             if (equippedWearables[3] > 100) {
                 equippedWearables[3] = 0;
             }
