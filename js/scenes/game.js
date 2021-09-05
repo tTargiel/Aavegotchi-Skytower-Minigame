@@ -54,7 +54,7 @@ class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'assets/images/background.png');
+        this.load.image('game-background', 'assets/images/game-background.png');
         this.load.image('ground', 'assets/images/tiles/tile1.png');
         this.load.image('tile', 'assets/images/tiles/tile2.png');
         this.load.image('wall', 'assets/images/tiles/tile3.png');
@@ -62,7 +62,7 @@ class Game extends Phaser.Scene {
 
     create() {
         var click2 = this.sound.add('click2');
-        var background = this.add.image(w / 2, h / 2, 'background');
+        var background = this.add.image(w / 2, h / 2, 'game-background');
         this.input.manager.enabled = true;
 
         vel = 50;
