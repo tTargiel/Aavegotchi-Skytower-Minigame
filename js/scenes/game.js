@@ -14,22 +14,43 @@ class Game extends Phaser.Scene {
     }
 
     addPlatform() {
-        platformsXcoordinates[amountOfPlatforms] = randomIntFromInterval(left, right);
-        platformsYcoordinates[amountOfPlatforms] = tilesize / (2 * scale);
+        eval(cont + platform + ".setActive(false);");
+        eval(cont + platform + ".setVisible(false);");
+        platformsXcoordinates[platform] = randomIntFromInterval(left, right);
+        platformsYcoordinates[platform] = tilesize / (2 * scale);
+        // for (let k = 0; k < randomIntFromInterval(tilemin, tilemax); k++) {
+        //     platforms = this.physics.add.image(platformsXcoordinates[amountOfPlatforms] + tilesize * k, platformsYcoordinates[amountOfPlatforms], 'tile').setScale(tilescale * scale).refreshBody();
+        //     platforms.body.velocity.y = vel;
+        //     this.physics.add.collider(player, platforms);
+        // }
+        // platforms.setCollideWorldBounds(true);
+        // platforms.body.onWorldBounds = true;
+        // platforms.body.world.on('worldbounds', function (body) {
+        //     if (body.gameObject === this) {
+        //         this.setActive(false);
+        //         this.setVisible(false);
+        //         this.scene.addPlatform();
+        //     }
+        // }, platforms);
+
+
+        eval(cont + platform + " = this.add.container("+platformsXcoordinates[platform]+", "+platformsYcoordinates[platform]+");");
         for (let k = 0; k < randomIntFromInterval(tilemin, tilemax); k++) {
-            platforms = this.physics.add.image(platformsXcoordinates[amountOfPlatforms] + tilesize * k, platformsYcoordinates[amountOfPlatforms], 'tile').setScale(tilescale * scale).refreshBody();
-            platforms.body.velocity.y = vel;
-            this.physics.add.collider(player, platforms);
+            eval("tile" + k + " = this.add.image(" + platformsXcoordinates[platform] + " + " + tilesize * k + ", " + platformsYcoordinates[platform] + ", 'tile');");
+            eval(cont + platform + ".add(tile" + k + ");");
         }
-        platforms.setCollideWorldBounds(true);
-        platforms.body.onWorldBounds = true;
-        platforms.body.world.on('worldbounds', function (body) {
-            if (body.gameObject === this) {
-                this.setActive(false);
-                this.setVisible(false);
-                this.scene.addPlatform();
-            }
-        }, platforms);
+        eval(cont + platform + ".setSize(" + tilemax * 48 + ", 48);");
+        this.physics.world.enableBody(eval(cont + platform));
+        this.physics.world.collide(player, eval(cont + platform));
+        if (platform == amountOfPlatforms - 1) {
+            platform = 0;
+        }
+        // eval(cont+i+".setCollideWorldBounds(true);");
+        // eval(cont+i+".body.onWorldBounds = true;");
+        // eval(cont+i+".body.world.on('worldbounds', function (body) {if (body.gameObject === this) {this.setActive(false);this.setVisible(false);this.scene.addPlatform();}}, "+cont+i+");");
+        // this.physics.add.overlap(player, eval(cont+i));
+        // eval("collider"+i+" = this.physics.world.collide(player, "+cont+i+")");
+        // }
     }
 
     preload() {
@@ -46,7 +67,7 @@ class Game extends Phaser.Scene {
 
         vel = 50;
         tilemin = 5;
-        tilemax = 10;
+        tilemax = 9;
 
         player = this.physics.add.image(w * 0.3, h / 2, 'player').setScale(0.1).setDepth(2).refreshBody();
 
@@ -59,36 +80,65 @@ class Game extends Phaser.Scene {
         this.generateStartingPlatformPositions();
         // this.physics.world.gravity.y = -10;
 
-        // for (let i = 0; i < amountOfPlatforms; i++) {
-        //     for (let j = 0; j < randomIntFromInterval(tilemin, tilemax); j++) {
-        //         platforms.create(platformsXcoordinates[i] + tilesize * j, platformsYcoordinates[i], 'tile').setScale(tilescale).refreshBody();
-        //     }
-        // }
-
         for (let i = 0; i < amountOfPlatforms; i++) {
+            eval(cont + i + " = this.add.container("+platformsXcoordinates[i]+", "+platformsYcoordinates[i]+");");
             for (let j = 0; j < randomIntFromInterval(tilemin, tilemax); j++) {
-                platforms = this.physics.add.image(platformsXcoordinates[i] + tilesize * j, platformsYcoordinates[i], 'tile').setScale(tilescale * scale).refreshBody();
-                platforms.body.velocity.y = vel;
-                this.physics.add.collider(player, platforms);
+                eval("tile" + j + " = this.add.image(" + platformsXcoordinates[i] + " + " + tilesize * j + ", " + platformsYcoordinates[i] + ", 'tile');");
+                eval(cont + i + ".add(tile" + j + ");");
             }
-            platforms.setCollideWorldBounds(true);
-            platforms.body.onWorldBounds = true;
-            platforms.body.world.on('worldbounds', function (body) {
-                if (body.gameObject === this) {
-                    this.setActive(false);
-                    this.setVisible(false);
-                    this.scene.addPlatform();
-                }
-            }, platforms);
+            eval(cont + i + ".setSize(" + tilemax * 48 + ", 48);");
+            this.physics.world.enableBody(eval(cont + i));
+            this.physics.world.collide(player, eval(cont + i));
+            // eval(cont+i+".setCollideWorldBounds(true);");
+            // eval(cont+i+".body.onWorldBounds = true;");
+            // eval(cont+i+".body.world.on('worldbounds', function (body) {if (body.gameObject === this) {this.setActive(false);this.setVisible(false);this.scene.addPlatform();}}, "+cont+i+");");
+            // this.physics.add.overlap(player, eval(cont+i));
+            // eval("collider"+i+" = this.physics.world.collide(player, "+cont+i+")");
         }
 
-        this.walls = this.add.group();
+        // for (let i = 0; i < amountOfPlatforms; i++) {
+        //     // var test = this.add.image(platformsXcoordinates[i], platformsYcoordinates[i], 'tile');
+
+        // }
+
+        // test = this.add.container();
+        //     // for (let j = 0; j < randomIntFromInterval(tilemin, tilemax); j++) {
+        //         // for (let j = 0; j < 6; j++) {
+        //             test1 = this.add.image(platformsXcoordinates[0] + tilesize * 0, platformsYcoordinates[0], 'tile')
+        //             test2 = this.add.image(platformsXcoordinates[0] + tilesize * 1, platformsYcoordinates[0], 'tile')
+        //             test3 = this.add.image(platformsXcoordinates[0] + tilesize * 2, platformsYcoordinates[0], 'tile')
+        //         // platforms.create(platformsXcoordinates[i] + tilesize * j, platformsYcoordinates[i], 'tile').setScale(tilescale).refreshBody();
+
+        //     // }
+        //     test.add(test1);
+        //     test.add(test2);
+        //     test.add(test3);
+
+        // for (let i = 0; i < amountOfPlatforms; i++) {
+        //     for (let j = 0; j < randomIntFromInterval(tilemin, tilemax); j++) {
+        //         platforms = this.physics.add.image(platformsXcoordinates[i] + tilesize * j, platformsYcoordinates[i], 'tile').setScale(tilescale * scale).refreshBody();
+        //         platforms.body.velocity.y = vel;
+        //         this.physics.add.collider(player, platforms);
+        //     }
+        //     platforms.setCollideWorldBounds(true);
+        //     platforms.body.onWorldBounds = true;
+        //     platforms.body.world.on('worldbounds', function (body) {
+        //         if (body.gameObject === this) {
+        //             this.setActive(false);
+        //             this.setVisible(false);
+        //             this.scene.addPlatform();
+        //         }
+        //     }, platforms);
+        // }
+
+        this.walls = this.physics.add.staticGroup();
 
         var wallwidth = w * 0.2;
         for (let wallW = 0; wallW <= wallwidth / tilesize; wallW++) {
             for (let wallH = 0; wallH <= h / tilesize; wallH++) {
                 this.walls.create(tilesize * wallW + tilesize / 2, tilesize * wallH + tilesize / 2, 'wall').setDepth(1).setScale(scale);
                 this.walls.create(tilesize * wallW - tilesize / 2 + w * 0.8, tilesize * wallH + tilesize / 2, 'wall').setDepth(1).setScale(scale);
+                this.physics.add.collider(player, this.walls);
             }
         }
 
@@ -113,11 +163,20 @@ class Game extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-        this.physics.add.overlap(player, platforms);
-        collider = this.physics.add.collider(player, platforms);
+        // this.physics.add.overlap(player, platforms);
+        // collider = this.physics.add.collider(player, platforms);
+        // for (let i = 0; i < amountOfPlatforms; i++) {
+        //     this.physics.add.overlap(player, eval(cont+i));
+        //     eval("collider"+i) = this.physics.add.collider(player, eval(cont+i));
+        // }
     }
 
     update() {
+        for (let a = 0; a < amountOfPlatforms; a++) {
+            // eval(coll+a+".active = true;");
+            this.physics.world.overlap(player, eval(cont + a));
+        }
+        
         if (cursors.left.isDown) {
             player.setVelocityX(-160);
         }
@@ -130,19 +189,35 @@ class Game extends Phaser.Scene {
 
         if (cursors.up.isDown && player.body.touching.down) {
             player.setVelocityY(-600);
+            player.setGravityY(400)
         }
 
         player.body.debugBodyColor = player.body.touching.none ? 0x0099ff : 0xff9900;
 
+        
         if (player.body.touching.down) {
-            collider.active = true;
+            for (let a = 0; a < amountOfPlatforms; a++) {
+                // eval(coll+a+".active = true;");
+                this.physics.world.collide(player, eval(cont + a));
+            }
             // console.log("na platformie");
         }
         else {
-            collider.active = false;
+            for (let b = 0; b < amountOfPlatforms; b++) {
+                // eval(coll+b+".active = false;");
+            }
             // console.log("w powietrzu");
         }
 
-        // platforms.y -= 10;
+        for (let n = 0; n < amountOfPlatforms; n++) {
+            eval(cont + n + ".body.velocity.y = "+vel+";");
+            if (eval(cont + (amountOfPlatforms - 1)).y % (3 * tilesize) < 1) {
+                this.addPlatform();
+            }
+        }
+
+        // container0.body.setVelocity(100, 200).setBounce(1, 1).setCollideWorldBounds(true);
+        // container0.y += 1;
+
     }
 }
